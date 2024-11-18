@@ -4,6 +4,10 @@ let newBtn=document.querySelector("#new-btn");
 let msgContainer=document.querySelector(".msg-container");
 let msg=document.querySelector("#msg");
 
+let drawContainer=document.querySelector(".draw-container")
+let draw=document.querySelector("#draw");
+let newBtnn=document.querySelector("#new-btnn");
+
 let turnO = true; //playerx, playerO
 
 const winPatterns = [
@@ -21,7 +25,15 @@ const resetGame=()=>{
     turnO=true;
     enableBoxes();
     msgContainer.classList.add("hide");
+
 }
+
+const resetGamee=()=>{
+    turnO=true;
+    enableBoxes();
+    drawContainer.classList.add("hidee");
+}
+
 boxes.forEach((box)=>{                     //going to the each box
     box.addEventListener("click",() =>{   //addEventListener tell that, that boxis clicked
         console.log("box was clicked");   //next function () tell that box was clicked
@@ -58,6 +70,13 @@ const showWinner=(winner)=>{
     disableBoxes();
 
 }
+
+ const showDraw=()=>{
+    draw.innerText=`Ooops, No One Is Win `;
+    drawContainer.classList.remove("hidee");
+    disableBoxes();
+ }
+
 const checkWinner =() =>{
     for(let pattern of winPatterns){
       
@@ -68,11 +87,22 @@ const checkWinner =() =>{
         if(pos1Val==pos2Val && pos2Val==pos3Val){
             console.log("Winner",pos1Val);  
             showWinner(pos1Val);
-            // disableBoxes();
-        } 
-    }
+
+ 
+        }
+       }
+// IF NO ONE IS WIN  AND ALL BOXES IS FILLED , THEN THIS WILL WORK
+const allBoxesFilled = [...boxes].every((box) => box.innerText != "");
+    if (allBoxesFilled) {
+        showDraw();
     }
 }
+}
 
+
+
+
+ 
 newBtn.addEventListener("click", resetGame);
 reset.addEventListener("click", resetGame);
+newBtnn.addEventListener("click", resetGamee);
